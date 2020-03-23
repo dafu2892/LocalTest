@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.localtest">
+
+
+    <!--查询用户-->
+    <select id="login" parameterType="com.localtest.model.TestUser" resultType="Integer">
+        select count(*) from test_user
+        where user_name=#{user_name}
+        and user_password = #{user_password}
+    </select>
+
+    <!--添加用户-->
+    <insert id="addUser" parameterType="com.localtest.model.TestUser">
+        insert into test_user(user_name, user_password, user_age, user_sex, isDelete)
+        values (#{user_name}, #{user_password}, #{user_age}, #{user_sex}, #{isDelete})
+    </insert>
+
+    <!--查询用户信息-->
+    <select id="getUserInfo" parameterType="com.localtest.model.TestUser" resultType="com.localtest.model.TestUser">
+        select * from test_user
+        <trim prefix="WHERE" prefixOverrides="AND">
+
+            <if test=" id != null and id !='' ">
+                AND id=#{id}
+            </if>
+
+            <if test=" user_name != null and user_name !='' ">
+                AND user_name = #{user_name}
+            </if>
+
+            <if test=" user_password != null and user_password !='' ">
+                AND user_password = #{user_password}
+            </if>
+
+            <if test=" user_age != null and user_age !='' ">
+                AND user_age = #{user_age}
+            </if>
+
+            <if test=" user_sex != null and user_sex !='' ">
+                AND user_sex = #{user_sex}
+            </if>
+
+            <if test=" isDelete != null and isDelete !='' ">
+                AND isDelete = #{isDelete}
+            </if>
+
+        </trim>
+    </select>
+
+    <!--更新用户信息-->
+    <update id="updateUserInfo" parameterType="com.localtest.model.TestUser">
+        update test_user
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test=" user_name != null and user_name !='' ">
+                user_name = #{user_name},
+            </if>
+
+            <if test=" user_password != null and user_password !='' ">
+                user_password = #{user_password},
+            </if>
+
+            <if test=" user_age != null and user_age !='' ">
+                user_age = #{user_age},
+            </if>
+
+            <if test=" user_sex != null and user_sex !='' ">
+                user_sex = #{user_sex},
+            </if>
+
+            <if test=" isDelete != null and isDelete !='' ">
+                isDelete = #{isDelete},
+            </if>
+
+        </trim>
+        where id = #{id}
+    </update>
+
+</mapper>

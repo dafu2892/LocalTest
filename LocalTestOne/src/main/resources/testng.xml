@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="local_test测试套件">
+
+    <parameter name="report.config" value="src/main/resources/report/extent-config.xml"/>
+    <parameter name="system.info" value="com.localtest.config.MySystemInfo"/>
+
+    <test name="localTest测试用例">
+
+        <classes>
+
+            <class name="com.localtest.cases.LoginTest">
+                <methods>
+                    <include name="loginTrue"/>
+                    <include name="loginFalse"/>
+                </methods>
+            </class>
+
+            <!--<class name="com.localtest.cases.AddUserTest">
+                <methods>
+                    <include name="addUser"/>
+                </methods>
+            </class>-->
+
+            <class name="com.localtest.cases.GetUserInfoTest">
+                <methods>
+                    <include name="getUserInfo"/>
+                </methods>
+            </class>
+
+            <class name="com.localtest.cases.GetUserListTest">
+                <methods>
+                    <include name="getUserList"/>
+                </methods>
+            </class>
+
+            <class name="com.localtest.cases.UpdateUserInfoTest">
+                <methods>
+                    <include name="updateUserInfo"/>
+                    <include name="deleteUser"/>
+                </methods>
+            </class>
+
+        </classes>
+
+    </test>
+
+    <listeners>
+        <listener class-name="com.localtest.config.MyExtentTestNGFormatter"/>
+    </listeners>
+
+</suite>

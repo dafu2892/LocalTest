@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.localtest.model">
+
+    <!--获取 登录接口 的Case-->
+    <select id="loginCase" parameterType="Integer" resultType="com.localtest.model.LoginCase">
+        select * from logincase where id=#{id}
+    </select>
+
+    <!--获取 添加用户接口 的Case-->
+    <select id="addUserCase" parameterType="Integer" resultType="com.localtest.model.AddUserCase">
+        select * from addusercase where id=#{id}
+    </select>
+
+    <!--获取 获取用户信息接口 的Case-->
+    <select id="getUserInfoCase" parameterType="Integer" resultType="com.localtest.model.GetUserInfoCase">
+        select * from getuserinfocase where id=#{id}
+    </select>
+
+    <!--获取 获取用户列表接口 的Case-->
+    <select id="getUserListCase" parameterType="Integer" resultType="com.localtest.model.GetUserListCase">
+        select * from getuserlistcase where id=#{id}
+    </select>
+
+    <!--获取 更新用户信息接口 的Case-->
+    <select id="updateUserInfoCase" parameterType="Integer" resultType="com.localtest.model.UpdateUserInfoCase">
+        select * from updateuserinfocase where id=#{id}
+    </select>
+
+    <!--获取用户列表-->
+    <select id="getUserList" parameterType="com.localtest.model.GetUserListCase" resultType="com.localtest.model.TestUser">
+        select * from test_user
+        <trim prefix="WHERE" prefixOverrides="AND">
+
+            <if test=" user_name != null and user_name !='' ">
+                AND user_name = #{user_name}
+            </if>
+
+            <if test=" user_age != null and user_age !='' ">
+                AND user_age = #{user_age}
+            </if>
+
+            <if test=" user_sex != null and user_sex !='' ">
+                AND user_sex = #{user_sex}
+            </if>
+        </trim>
+    </select>
+
+    <!--获取用户信息-->
+    <select id="getUserInfo" parameterType="com.localtest.model.GetUserInfoCase" resultType="com.localtest.model.TestUser">
+        select * from test_user where id=#{user_id}
+    </select>
+
+    <!--更新用户信息-->
+    <select id="getUpdateUserInfo" parameterType="com.localtest.model.UpdateUserInfoCase"
+            resultType="com.localtest.model.TestUser">
+        select * from test_user
+        <trim prefix="WHERE" prefixOverrides="AND">
+
+            <if test=" user_name != null and user_name !='' ">
+                AND user_name = #{user_name}
+            </if>
+
+            <if test=" user_age != null and user_age !='' ">
+                AND user_age = #{user_age}
+            </if>
+
+            <if test=" user_sex != null and user_sex !='' ">
+                AND user_sex = #{user_sex}
+            </if>
+
+            <if test=" user_isDelete != null and user_isDelete !='' ">
+                AND isDelete = #{user_isDelete}
+            </if>
+        </trim>
+        and id=#{user_id}
+    </select>
+
+
+</mapper>
